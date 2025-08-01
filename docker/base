@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM appium/appium:v2.19.0-p3
 
 ARG AUTHORS="Budi Utomo"
