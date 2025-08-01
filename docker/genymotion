@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 ARG DOCKER_ANDROID_VERSION
 FROM budtmo/docker-android:base_${DOCKER_ANDROID_VERSION}
 
@@ -35,8 +36,8 @@ ENV APP_PATH=${WORK_PATH}/${SCRIPT_PATH}
 RUN mkdir -p ${APP_PATH}
 COPY mixins ${APP_PATH}/mixins
 COPY cli ${APP_PATH}/cli
-RUN --mount=type=secret,id=extension,dst=/tmp/extension.sh \
-    bash /tmp/extension.sh
+RUN --mount=type=secret,id=extension,dst=/tmp/extension.sh,required=false \
+    if [ -f /tmp/extension.sh ]; then bash /tmp/extension.sh; fi
 
 #===================================
 # Create Genymotion Template folder
